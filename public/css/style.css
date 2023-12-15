@@ -1,0 +1,135 @@
+html {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #3e4e66;
+    overflow-x: hidden;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+#window {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 2rem auto;
+    width: 70%;
+    height: 40rem;
+    border-radius: 10px 0 0 10px;
+    position: relative;
+    display: flex;
+}
+
+#main {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 0px;
+}
+
+#question {
+    font-size: 1.5rem;
+    background-color: #512056;
+    color: white;
+    width: 50%;
+    border-radius: 10px;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+}
+
+#answers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.answer {
+    width: 50%;
+    margin: 1rem 0;
+}
+
+.answer button {
+    width: 50%;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    background-color: #512056;
+    border-radius: 10px;
+}
+
+.answer button:hover {
+    background-color: #f7e488;
+    color: #000;
+}
+
+#prize {
+    position: absolute;
+    right: -15%;
+    width: 15%;   
+    height: 100%;
+    color: #f7e488;
+    font-weight: 700;
+    background-color: #512056;
+    border-radius: 0 10px 10px 0;
+}
+
+#prize p{
+    padding: 0.2rem 1rem;
+    border-radius: 5px;
+}
+
+.g {
+    color: white;
+}
+
+.c {
+    background-color: #f7e488 !important;
+    color: #512056 !important;
+}
+
+.backdrop {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal, .modal_incorrect {
+    position: fixed;
+    display: none;
+    z-index: 200;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    background: #3e4e66;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    color: #fff;
+}
+
+.modal a, .modal_incorrect a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #fff;
+}
