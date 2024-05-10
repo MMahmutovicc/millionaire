@@ -1,6 +1,8 @@
 <?php 
+//session_unset();
 session_start();
-$_SESSION['br'] = $_POST['question'] ?? $_SESSION['br'] ?? 0;
+$_SESSION['br'] = $_GET['question'] ?? $_SESSION['br'] ?? 0;
+//echo $_POST['question'];
 echo $_SESSION['br'];
 /** @var $pdo \PDO */
 require_once '../database.php';
@@ -25,10 +27,11 @@ $to = rand(1,4);
 <body>
     <div class="backdrop"></div>
     <div class="modal">
-        <?php if($_SESSION['br'] === 15) { ?>
+        <?php if($_SESSION['br'] > 13) {?>
         <a href="medalja.php">Čestitke, osvojili ste!</a>
         <?php } else {?>
-        <a href="index.php" onclick="nextQuestion(<?php echo $_SESSION['br']?>)">Sljedeće Pitanje</a>
+        <h2>Tačan odgovor!</h2>
+        <a href="index.php">Sljedeće Pitanje</a>
         <?php }?>
     </div>
     <div class="modal_incorrect">
@@ -39,7 +42,7 @@ $to = rand(1,4);
         <?php } else {?>
         <h2>Više sreće drugi put!</h2>
         <?php } ?>
-        <a href="index.php" onclick="startOver()">Probajte Ispočetka</a>
+        <a href="index.php">Probajte ispočetka</a>
     </div>
 
     <h1>Ko Želi Biti Milijunaš?</h1>
@@ -48,48 +51,48 @@ $to = rand(1,4);
             <p id="question"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['tekst']?></p>
             <div id="answers">
                 <form action="" method="post" class="answer">
-                    <?php if($to==1) { $o=1;?>
+                    <?php if($to==1) { ?>
                         <input type="hidden" name="odg" value="1">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
+                        <button name="btn" type="button" onclick="nextQuestion(this.form,<?php echo $_SESSION['br'] ?>)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
                     <?php } else {?>
                         <input type="hidden" name="odg" value="0">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n1odgovor']?></button>
+                        <button name="btn" type="button" onclick="startOver(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n1odgovor']?></button>
                     <?php }?>
                 </form>
 
                 <form action="" method="post" class="answer">
-                    <?php if($to==2) { $o=2;?>
+                    <?php if($to==2) { ?>
                         <input type="hidden" name="odg" value="1">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
+                        <button name="btn" type="button" onclick="nextQuestion(this.form,<?php echo $_SESSION['br'] ?>)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
                     <?php } else {?>
                         <input type="hidden" name="odg" value="0">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n2odgovor']?></button>
+                        <button name="btn" type="button" onclick="startOver(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n2odgovor']?></button>
                     <?php }?>
                 </form>
 
                 <form action="" method="post" class="answer">
-                    <?php if($to==3) { $o=3;?>
+                    <?php if($to==3) { ?>
                         <input type="hidden" name="odg" value="1">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
+                        <button name="btn" type="button" onclick="nextQuestion(this.form,<?php echo $_SESSION['br'] ?>)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
                     <?php } else {?>
                         <input type="hidden" name="odg" value="0">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n3odgovor']?></button>
+                        <button name="btn" type="button" onclick="startOver(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n3odgovor']?></button>
                     <?php }?>
                 </form>
 
                 <form action="" method="post" class="answer">
                     <?php if($to==4) {?>
                         <input type="hidden" name="odg" value="1">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
-                    <?php } else if($o==3) {?>
+                        <button name="btn" type="button" onclick="nextQuestion(this.form,<?php echo $_SESSION['br'] ?>)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['todgovor']?></button>
+                    <?php } else if($to==3) {?>
                         <input type="hidden" name="odg" value="0">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n3odgovor']?></button>
-                    <?php } else if($o==2) {?>
+                        <button name="btn" type="button" onclick="startOver(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n3odgovor']?></button>
+                    <?php } else if($to==2) {?>
                         <input type="hidden" name="odg" value="0">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n2odgovor']?></button>
-                    <?php } else if($o==1) {?>
+                        <button name="btn" type="button" onclick="startOver(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n2odgovor']?></button>
+                    <?php } else if($to==1) {?>
                         <input type="hidden" name="odg" value="0">
-                        <button name="btn" type="button" onclick="checkForm(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n1odgovor']?></button>
+                        <button name="btn" type="button" onclick="startOver(this.form)"><?php echo $_SESSION['pitanja'][$_SESSION['br']]['n1odgovor']?></button>
                     <?php }?>
                 </form>
             </div>
@@ -117,7 +120,7 @@ $to = rand(1,4);
         var modal = document.querySelector('.modal');
         var modalIncorrect = document.querySelector('.modal_incorrect');
         var backdrop = document.querySelector('.backdrop');
-        function checkForm(form){
+        /*function checkForm(form){
             if(form.odg.value=="1")
             {
                 form.btn.style.backgroundColor = "green";
@@ -130,22 +133,28 @@ $to = rand(1,4);
                 backdrop.style.display="block";
                 modalIncorrect.style.display="block";
             }
-        }
-        function nextQuestion(a){
-            a=a+1;
+        }*/
+        function nextQuestion(form, a){
+            form.btn.style.backgroundColor = "green";
+            backdrop.style.display="block";
+            modal.style.display="block";
+            a += 1;
             $.ajax({
                 url: 'index.php',
-                type: "POST",
-                data:'question='+a,
+                type: "GET",
+                data:{question: a},
                 success:function() {
                 }
-            })
+            });
         }
-        function startOver(){
+        function startOver(form){
+            form.btn.style.backgroundColor = "red";
+            backdrop.style.display="block";
+            modalIncorrect.style.display="block";
             $.ajax({
                 url: 'index.php',
-                type: "POST",
-                data:'question='+0,
+                type: "GET",
+                data:{question: 0},
                 success:function() {
                 }
             })
